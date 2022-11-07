@@ -46,7 +46,7 @@ jobs:
     - name: Run Trivy vulnerability scanner
       uses: aquasecurity/trivy-action@master
       with:
-        image-ref: '${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}'
+        image-ref: '${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:main'  # Todo we should reference the right label, and also not push?
         format: 'sarif'
         output: 'trivy-results.sarif'
 
