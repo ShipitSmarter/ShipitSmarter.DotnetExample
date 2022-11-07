@@ -19,8 +19,5 @@ spec:
       - name: {{ .Chart.Name }}
         image: "{{ .Values.image.name }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
-        env:
-        - name: SomeEnvValue
-          value: "NiceValue"
         ports:
         - containerPort: 80

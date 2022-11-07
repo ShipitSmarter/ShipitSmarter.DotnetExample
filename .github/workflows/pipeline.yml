@@ -28,6 +28,7 @@ jobs:
         password: ${{ secrets.GITHUB_TOKEN }}
     
     # https://github.com/marketplace/actions/docker-metadata-action
+    # https://thekevinwang.com/2022/06/13/github-actions-survival-skills/#iterating-quickly
     - name: Extract metadata (tags, labels) for Docker
       id: meta
       uses: docker/metadata-action@v4
