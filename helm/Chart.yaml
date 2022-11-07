@@ -1,0 +1,6 @@
+apiVersion: v2
+name: shipitsmarter.dotnetexample
+description: A test Helm chart for showing how it could work together
+type: application
+version: "0.0.1+replaced.by.yq.in.pipeline"
+appVersion: "1.0.0"

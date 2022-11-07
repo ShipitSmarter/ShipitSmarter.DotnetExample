@@ -1,0 +1,14 @@
+﻿apiVersion: v1
+kind: Service
+metadata:
+  name: shipitsmarter-dotnet-example
+  labels:
+    {{- include "shipitsmarter-dotnet-example.labels" . | nindent 4 }}
+spec:
+  type: ClusterIP
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+  selector:
+    {{- include "shipitsmarter-dotnet-example.selectorLabels" . | nindent 4 }}

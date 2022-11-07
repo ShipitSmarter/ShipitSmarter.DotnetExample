@@ -1,0 +1,8 @@
+replicaCount: 1
+image:
+  pullPolicy: Always
+  tag: "0.0.1+replaced.by.yq.in.pipeline" # sha-3143aea
+  name: ghcr.io/shipitsmarter/shipitsmarter.dotnetexample
+
+config:
+  externalHost: some-url.test.com

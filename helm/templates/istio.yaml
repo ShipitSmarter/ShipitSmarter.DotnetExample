@@ -1,0 +1,47 @@
+{{- $externalHost := required ".Values.config.externalHost is required" .Values.config.externalHost -}}
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: "{{ .Release.Namespace }}-tls-shipitsmarter-dotnet-example"
+  namespace: istio-ingress
+spec:
+  secretName: "{{ .Release.Namespace }}-tls-shipitsmarter-dotnet-example"
+  commonName: "{{ $externalHost }}"
+  dnsNames:
+  - "{{ $externalHost }}"
+  issuerRef:
+    group: cert-manager.io
+    kind: ClusterIssuer
+    name: letsencrypt-prod
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: shipitsmarter-dotnet-example
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+    - port:
+        number: 443
+        name: https
+        protocol: HTTPS
+      hosts:
+      - "{{ $externalHost }}"
+      tls:
+        mode: SIMPLE
+        credentialName: "{{ .Release.Namespace }}-tls-shipitsmarter-dotnet-example"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: shipitsmarter-dotnet-example
+spec:
+  hosts:
+  - "{{ $externalHost }}"
+  gateways:
+  - shipitsmarter-dotnet-example
+  http:
+  - route:
+    - destination:
+        host: shipitsmarter-dotnet-example
