@@ -38,7 +38,8 @@ jobs:
         images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
         tags: |
           type=ref,event=branch
-          type=sha,format=long
+          # Configure a pr tag when this is a PR build, include both the number and the full sha
+          type=raw,value=pr-${{ github.event.number }}-${{ github.event.pull_request.head.sha }},enable=${{ github.event_name == 'pull_request' }}
           # set latest tag for default branch
           type=raw,value=latest,enable={{is_default_branch}}
     
