@@ -1,14 +1,5 @@
 Example project to show / talk about how we want smaller projects to come to live.
 
-```
-dotnet new gitignore
-dotnew new webapp
-```
+The main point is to prove that our flows can work (better) with github actions. This should also be an example to show how it all should work and perhaps a nice thing to turn into a blog.
 
-General tips / hints
-
-https://learn.microsoft.com/en-us/dotnet/core/docker/build-container?tabs=windows
-
-See if we can get the container scanner in here as well and publish result to some tab?
-
-Be aware this is public to show off the security capabilities that github can give us.
+This thing needs to be public to show off the security capabilities that github can give us.

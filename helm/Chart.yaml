@@ -1,5 +1,5 @@
 apiVersion: v2
-name: shipitsmarter.dotnetexample
+name: dotnetexample # Please don't use a . in this name!
 description: A test Helm chart for showing how it could work together
 type: application
 version: "0.0.1+replaced.by.yq.in.pipeline"

@@ -28,6 +28,8 @@ jobs:
         password: ${{ secrets.GITHUB_TOKEN }}
     
     # https://github.com/marketplace/actions/docker-metadata-action
+    # https://thekevinwang.com/2022/06/13/github-actions-survival-skills/#iterating-quickly
+    # Some extra change
     - name: Extract metadata (tags, labels) for Docker
       id: meta
       uses: docker/metadata-action@v4
@@ -46,10 +48,15 @@ jobs:
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
 
+    - run: |
+        echo "${JSON}" | jq
+      env:
+        JSON: ${{ toJson(steps.meta.outputs) }}
+
     - name: Run Trivy vulnerability scanner
       uses: aquasecurity/trivy-action@master
       with:
-        image-ref: ghcr.io/shipitsmarter/shipitsmarter.dotnetexample:main #${{ steps.meta.outputs.tags[0].message }}  # Take the first reference
+        image-ref: ${{ fromJson(steps.meta.outputs.json).tags[0] }}  # Take the first reference, and for some reason the normal tags is a single string with a \n in it (therefore I thought it was a list).
         format: 'sarif'
         output: 'trivy-results.sarif'
 
